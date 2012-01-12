@@ -13,15 +13,19 @@ $(document).ready(function(){
 	var stage		=	$('#stage');
 	var sun			=	$('#sun');
 	var hills		=	$('#hills');
+	var cloud1		=	$('#cloud1');
+	var cloud2		=	$('#cloud2');
+	var stars		=	$('#stars');
 
-	var stagewidth	=	$(document).width() - sun.width();
+	var stagewidth	=	$(document).width();
+	var sunstage	=	stagewidth - sun.width();
 	var pagebottom	=	$(document).height() - $(window).height();
 
 	var orgsunwidth		=	sun.width();
 	var orgsunheight	=	sun.height();
 
 	var radius 	= stagewidth/2;
-	var centerX	= stagewidth/2;
+	var centerX	= sunstage/2;
 	var centerY	= hills.offset().top;
 	
 	var scrollpercent	=	0;
@@ -66,6 +70,9 @@ $(document).ready(function(){
 		scrollpercent		=	scrollpos/pagebottom*100;
 		
 		animateSun();
+		animateCloud1();
+		animateCloud2();
+		animateStars();
 
 	});
 
@@ -113,6 +120,47 @@ $(document).ready(function(){
 
 		ypos -= sun.height()/2;
 		sun.css({bottom:ypos,left:xpos});
+	}
+	
+	function animateCloud1() {	
+		var cloudleft	=	scrollpercent / 100 * stagewidth;
+		cloud1.css({left:cloudleft});
+	}
+	
+	function animateCloud2() {
+		var cloudright	=	scrollpercent / 100 * stagewidth;
+		cloud2.css({right:cloudright});
+	}
+	
+	function animateStars() {
+		
+		if(scrollpercent < 90 && stars.hasClass('nighttime')) {
+			stars.removeClass('nighttime');
+			stars.html('');
+			stars.hide();
+			return true;
+		}
+		
+		if(scrollpercent < 90 || stars.hasClass('nighttime')) {
+			//stars.hide();
+			return true;
+		}
+		
+		stars.addClass('nighttime');
+		
+		var starswidth	=	stars.width();
+		var starsheight	=	stars.height();
+		
+		for(var i=0;i<40;i++) {
+			var w		=	Math.random()*2;
+			var h		=	Math.random()*2;
+			var top		=	Math.random()*starsheight;
+			var left	=	Math.random()*starswidth;
+			var star	=	'<div class="star"></div>';			
+			stars.append(star);
+			$('.star:last',stars).width(w).height(h).css({left:left,top:top});
+		}
+		stars.fadeIn();
 	}
 
 });
