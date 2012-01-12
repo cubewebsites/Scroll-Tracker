@@ -23,6 +23,9 @@ $(document).ready(function(){
 	var radius 	= stagewidth/2;
 	var centerX	= stagewidth/2;
 	var centerY	= hills.offset().top;
+	
+	var scrollpercent	=	0;
+	var scrollpos		=	0;
 
 	//make the stage full screen
 	stage.width($(window).width());
@@ -59,9 +62,14 @@ $(document).ready(function(){
 
 	$(document).bind('scroll',function(e){
 		
-		var scrollpos			=	$(this).scrollTop();
-		var scrollpercent		=	scrollpos/pagebottom*100;
+		scrollpos			=	$(this).scrollTop();
+		scrollpercent		=	scrollpos/pagebottom*100;
+		
+		animateSun();
 
+	});
+
+	function animateSun() {
 		//the sun moves into the distance towards midday...
 		var x = sun.offset().left - centerX;
 		var scalefactor = Math.abs(x) * 1/radius;
@@ -95,12 +103,8 @@ $(document).ready(function(){
 			from = skycolours.dusk;
 			to = skycolours.night;
 		}
-
+		//let me light up the sky...
 		stage.stop().animate({backgroundColor:to},'fast');		
-
-//		colorStore(from);
-//		stepCalc();
-//		mixPalette();
 
 		//move the sun along the circumference
 		var angle 	=	-1*(scrollpercent / 180) * Math.PI*2 + Math.PI;
@@ -109,7 +113,6 @@ $(document).ready(function(){
 
 		ypos -= sun.height()/2;
 		sun.css({bottom:ypos,left:xpos});
-
-	});
+	}
 
 });
