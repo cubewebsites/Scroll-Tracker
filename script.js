@@ -1,3 +1,6 @@
+/**
+* Method for applying vendor specific styles for rotation
+**/
 function cube_rotate(element,angle) {
 	var units = 'rad';
 	element.css('-webkit-transform','rotate('+angle+units+')');
@@ -7,7 +10,7 @@ function cube_rotate(element,angle) {
 }
 
 $(document).ready(function(){
-		
+	//globals
 	var stage		=	$('#stage');
 	var sun			=	$('#sun');
 	var hills		=	$('#hills');
@@ -15,25 +18,24 @@ $(document).ready(function(){
 	var cloud2		=	$('#cloud2');
 	var stars		=	$('#stars');
 	var showcontent	=	false;
-
+	//hide content if showcontent is off
 	if(!showcontent) {
 		$('.content-wrapper').hide();
 		$('body').css({height:'2000px'});
 	}
-
+	//calculate some useful dimensions
 	var stagewidth	=	$(document).width();
 	var sunstage	=	stagewidth - sun.width();
 	var orgsunwidth		=	sun.width();
 	var orgsunheight	=	sun.height();
-
+	//useful variables for the sun motion
 	var radius 	= stagewidth/2;
 	var centerX	= sunstage/2;
 	var centerY	= hills.offset().top;
-
 	//make the stage full screen
 	stage.width($(window).width());
 	stage.height($(window).height());
-
+	//various colours of the day
 	var skycolours	=	({
 		night : '#112B3D',
 		dawn  : '#836f8e',
@@ -42,9 +44,12 @@ $(document).ready(function(){
 		afternoon : '#55DBEE',		
 		dusk : '#B54D36'
 	});
-
+	//the fun bit - initialize the tracker
 	scrollTracker.initialize();
+	//callback for when the window is resized
 	scrollTracker.onResize = resize;
+
+	//add some objects to track on the scroll event
 	scrollTracker.addObject('sun',animateSun);
 	//an example of an inline callback, rather than explicitly named function
 	scrollTracker.addObject('cloud1',function(scrollpercent,scrollpos){	
@@ -54,17 +59,19 @@ $(document).ready(function(){
 	scrollTracker.addObject('cloud2',animateCloud2);
 	scrollTracker.addObject('stars',animateStars);
 
+	//callback function for window resize
 	function resize() {
+		//recalculate all the varaibles
 		stagewidth	=	$(document).width();
 		sunstage	=	stagewidth - sun.width();		
 		radius 	= stagewidth/2;
 		centerX	= sunstage/2;
 		centerY	= hills.offset().top;
-
 		stage.width($(window).width());
 		stage.height($(window).height());
 	}
 
+	//callback for the sun object
 	function animateSun(scrollpercent,scrollpos) {
 		//the sun moves into the distance towards midday...
 		var x = sun.offset().left - centerX;
@@ -110,14 +117,16 @@ $(document).ready(function(){
 		ypos -= sun.height()/2;
 		sun.css({bottom:ypos,left:xpos});
 	}
-		
+	
+	//callback for cloud2
 	function animateCloud2(scrollpercent,scrollpos) {
 		var cloudright	=	scrollpercent / 100 * stagewidth;
 		cloud2.css({right:cloudright});
 	}
 	
+	//callback for the stars
 	function animateStars(scrollpercent,scrollpos) {
-		
+		//destroy the stars if user has scrolled away from night
 		if(scrollpercent < 90 && stars.hasClass('nighttime')) {
 			stars.removeClass('nighttime');
 			stars.html('');
@@ -125,21 +134,26 @@ $(document).ready(function(){
 			return true;
 		}
 		
+		//do nothing if its not nighttime yet
 		if(scrollpercent < 90 || stars.hasClass('nighttime')) {
 			return true;
 		}
 		
+		//add a class name to track if it's already nighttime
 		stars.addClass('nighttime');
 		
+		//get the size of the stars element
 		var starswidth	=	stars.width();
 		var starsheight	=	stars.height();
 		
+		//create 40 random stars
 		for(var i=0;i<40;i++) {
-			var w		=	Math.random()*2;
-			var h		=	Math.random()*2;
-			var top		=	Math.random()*starsheight;
-			var left	=	Math.random()*starswidth;
-			var star	=	'<div class="star"></div>';			
+			var w		=	Math.random()*2;			//max 2 pixels wide
+			var h		=	Math.random()*2;			//max 2 pixels high
+			var top		=	Math.random()*starsheight;	//ensure it's within the stars element
+			var left	=	Math.random()*starswidth;	//ensure it's within the stars element
+			var star	=	'<div class="star"></div>'; //create the html syntax for it
+			//add to stars,  and apply attributes
 			stars.append(star);
 			$('.star:last',stars).width(w).height(h).css({left:left,top:top});
 		}
