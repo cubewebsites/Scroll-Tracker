@@ -7,7 +7,7 @@ function cube_rotate(element,angle) {
 }
 
 $(document).ready(function(){
-	
+		
 	var stage		=	$('#stage');
 	var sun			=	$('#sun');
 	var hills		=	$('#hills');
@@ -23,17 +23,12 @@ $(document).ready(function(){
 
 	var stagewidth	=	$(document).width();
 	var sunstage	=	stagewidth - sun.width();
-	var pagebottom	=	$(document).height() - $(window).height();
-
 	var orgsunwidth		=	sun.width();
 	var orgsunheight	=	sun.height();
 
 	var radius 	= stagewidth/2;
 	var centerX	= sunstage/2;
 	var centerY	= hills.offset().top;
-	
-	var scrollpercent	=	0;
-	var scrollpos		=	0;
 
 	//make the stage full screen
 	stage.width($(window).width());
@@ -47,20 +42,17 @@ $(document).ready(function(){
 		afternoon : '#55DBEE',		
 		dusk : '#B54D36'
 	});
-	
-	$(window).scroll(function(e){
 
-		scrollpos			=	$(this).scrollTop();
-		scrollpercent		=	scrollpos/pagebottom*100;
-		
-		animateSun();
-		animateCloud1();
-		animateCloud2();
-		animateStars();
-
+	scrollTracker.initialize();
+	scrollTracker.addObject('sun',animateSun);
+	scrollTracker.addObject('cloud1',function(scrollpercent,scrollpos){	
+		var cloudright	=	scrollpercent / 100 * stagewidth;
+		cloud1.css({right:cloudright});
 	});
+	scrollTracker.addObject('cloud2',animateCloud2);
+	scrollTracker.addObject('stars',animateStars);
 
-	function animateSun() {
+	function animateSun(scrollpercent,scrollpos) {
 		//the sun moves into the distance towards midday...
 		var x = sun.offset().left - centerX;
 		var scalefactor = Math.abs(x) * 1/radius;
@@ -97,26 +89,21 @@ $(document).ready(function(){
 		//let me light up the sky...
 		stage.stop().animate({backgroundColor:to},'fast');		
 
-		//move the sun along the circumference
-		var angle 	=	-1*(scrollpercent / 180) * Math.PI*2 + Math.PI;
+		//move the sun along the arc
+		var angle 	=	-1*(scrollpercent / 180) * Math.PI*2 + Math.PI; //*-1 gets the clockwise angle, 
 		xpos		=	radius * Math.cos(angle) + centerX;
 		ypos		=	hills.height() + radius * Math.sin(angle);
 
 		ypos -= sun.height()/2;
 		sun.css({bottom:ypos,left:xpos});
 	}
-	
-	function animateCloud1() {	
-		var cloudright	=	scrollpercent / 100 * stagewidth;
-		cloud1.css({right:cloudright});
-	}
-	
-	function animateCloud2() {
+		
+	function animateCloud2(scrollpercent,scrollpos) {
 		var cloudright	=	scrollpercent / 100 * stagewidth;
 		cloud2.css({right:cloudright});
 	}
 	
-	function animateStars() {
+	function animateStars(scrollpercent,scrollpos) {
 		
 		if(scrollpercent < 90 && stars.hasClass('nighttime')) {
 			stars.removeClass('nighttime');
@@ -145,5 +132,4 @@ $(document).ready(function(){
 		}
 		stars.fadeIn();
 	}
-
 });
