@@ -8,8 +8,6 @@ function cube_rotate(element,angle) {
 
 $(document).ready(function(){
 	
-	var debugmode	=	false;
-
 	var stage		=	$('#stage');
 	var sun			=	$('#sun');
 	var hills		=	$('#hills');
@@ -43,24 +41,6 @@ $(document).ready(function(){
 		afternoon : '#55DBEE',		
 		dusk : '#B54D36'
 	});
-
-	//make sure the stage is a canvas element
-	//draw the arc
-	if(debugmode) {
-		stage.prepend('<canvas id="canvas" />');
-		var canvas	=	document.getElementById('canvas');
-	    canvas.width = stagewidth;
-	    canvas.height = stage.height();
-
-		var context = canvas.getContext("2d");		
-		var startingAngle	=	0;
-		var endingAngle		=	1 * Math.PI;
-
-		context.arc(centerX,centerY,radius,startingAngle,endingAngle,true);
-		context.lineWidth	=	1;
-		context.strokeStyle = 	"black";
-		context.stroke();
-	}
 	
 	$(window).scroll(function(e){
 
