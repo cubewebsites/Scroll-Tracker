@@ -1,0 +1,45 @@
+= ScrollTracker =
+ScrollTracker is a tiny plugin which lets you easily do things depending on how far down the page the viewer has scrolled
+
+== Requirements ==
+* jQuery
+
+== Installation ==
+Simply include the <code>scrolltracker.js</code> file on your page '''after''' your inclusion of jQuery
+E.g.
+<pre>
+<code>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="scrolltracker.js"></script>
+</code>
+</pre>
+
+== Usage ==
+Once included, you'll need to initialize the tracker, and then add at least one callback(a function which is called whenever the page is scrolled)
+The callback can accept two parameters:
+<code>scrollpercent</code> - how far the viewer has scrolled as a percent
+<code>scrollpos</code> - the number of pixels the viewer has scrolled
+E.g.
+<pre>
+<code>
+$(document).ready(function(){
+	//initialize the tracker
+	scrollTracker.initialize();
+	//add a callback	
+	scrollTracker.addObject('body',function(scrollpercent,scrollpos){
+		//do something really cool here		
+	});
+});
+</code>
+</pre>
+
+== Documentation ==
+Beyond the basics, you can take advantage of various other features:
+
+'''onResize''' - attach a callback function to this event if you need to handle window resizing.
+E.g.
+<pre>
+	scrollTracker.onResize = function(){
+		alert('window resized');
+	};
+</pre>
