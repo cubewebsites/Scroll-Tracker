@@ -14,6 +14,12 @@ $(document).ready(function(){
 	var cloud1		=	$('#cloud1');
 	var cloud2		=	$('#cloud2');
 	var stars		=	$('#stars');
+	var showcontent	=	false;
+
+	if(!showcontent) {
+		$('.content-wrapper').hide();
+		$('body').css({height:'2000px'});
+	}
 
 	var stagewidth	=	$(document).width();
 	var sunstage	=	stagewidth - sun.width();
@@ -120,7 +126,6 @@ $(document).ready(function(){
 		}
 		
 		if(scrollpercent < 90 || stars.hasClass('nighttime')) {
-			//stars.hide();
 			return true;
 		}
 		
