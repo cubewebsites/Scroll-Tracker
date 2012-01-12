@@ -33,7 +33,7 @@ $(document).ready(function(){
 
 	//make the stage full screen
 	stage.width($(window).width());
-	stage.height($(window).height());	
+	stage.height($(window).height());
 
 	var skycolours	=	({
 		night : '#112B3D',
@@ -62,10 +62,8 @@ $(document).ready(function(){
 		context.stroke();
 	}
 	
+	$(window).scroll(function(e){
 
-
-	$(document).bind('scroll',function(e){
-		
 		scrollpos			=	$(this).scrollTop();
 		scrollpercent		=	scrollpos/pagebottom*100;
 		
