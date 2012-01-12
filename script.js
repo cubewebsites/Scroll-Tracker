@@ -123,8 +123,8 @@ $(document).ready(function(){
 	}
 	
 	function animateCloud1() {	
-		var cloudleft	=	scrollpercent / 100 * stagewidth;
-		cloud1.css({left:cloudleft});
+		var cloudright	=	scrollpercent / 100 * stagewidth;
+		cloud1.css({right:cloudright});
 	}
 	
 	function animateCloud2() {
