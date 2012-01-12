@@ -28,14 +28,14 @@ $(document).ready(function(){
 	stage.width($(window).width());
 	stage.height($(window).height());	
 
-	var skycolours	=	{
+	var skycolours	=	({
 		night : '#112B3D',
 		dawn  : '#836f8e',
-		morning : '#DDF6DF'
+		morning : '#DDF6DF',
 		midday : '#C2F5EE',
 		afternoon : '#55DBEE',		
 		dusk : '#B54D36'
-	};
+	});
 
 	//make sure the stage is a canvas element
 	//draw the arc
@@ -77,7 +77,7 @@ $(document).ready(function(){
 		var to = skycolours.dawn;		
 		if(scrollpercent > 10 && scrollpercent < 20) {
 			from = skycolours.dawn;
-			to   = skycolors.morning;
+			to   = skycolours.morning;
 		}
 		else if(scrollpercent >= 20 && scrollpercent < 50) {
 			from = skycolours.morning;
@@ -96,9 +96,11 @@ $(document).ready(function(){
 			to = skycolours.night;
 		}
 
-		colorStore(from);
-		stepCalc();
-		mixPalette();
+		stage.stop().animate({backgroundColor:to},'fast');		
+
+//		colorStore(from);
+//		stepCalc();
+//		mixPalette();
 
 		//move the sun along the circumference
 		var angle 	=	-1*(scrollpercent / 180) * Math.PI*2 + Math.PI;
