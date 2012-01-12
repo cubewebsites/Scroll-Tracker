@@ -44,13 +44,26 @@ $(document).ready(function(){
 	});
 
 	scrollTracker.initialize();
+	scrollTracker.onResize = resize;
 	scrollTracker.addObject('sun',animateSun);
+	//an example of an inline callback, rather than explicitly named function
 	scrollTracker.addObject('cloud1',function(scrollpercent,scrollpos){	
 		var cloudright	=	scrollpercent / 100 * stagewidth;
 		cloud1.css({right:cloudright});
 	});
 	scrollTracker.addObject('cloud2',animateCloud2);
 	scrollTracker.addObject('stars',animateStars);
+
+	function resize() {
+		stagewidth	=	$(document).width();
+		sunstage	=	stagewidth - sun.width();		
+		radius 	= stagewidth/2;
+		centerX	= sunstage/2;
+		centerY	= hills.offset().top;
+
+		stage.width($(window).width());
+		stage.height($(window).height());
+	}
 
 	function animateSun(scrollpercent,scrollpos) {
 		//the sun moves into the distance towards midday...
