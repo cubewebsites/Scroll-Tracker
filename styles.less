@@ -1,0 +1,127 @@
+.rounded(@radius:16px) {
+	border-radius:@radius;
+	-webkit-border-radius:@radius;
+	-moz-border-radius:@radius;
+}
+
+.opacity(@transparency) {
+	@mstransparency	: @transparency*100;
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=@{mstransparency})";
+	/* IE 5-7 */
+	filter: alpha(opacity=@mstransparency);
+	/* Netscape */
+	-moz-opacity: @transparency;
+	/* Safari 1.x */
+	-khtml-opacity: @transparency;
+	/* Good browsers */
+	opacity: @transparency;
+}
+
+.backgroundsize(@x:auto,@y:auto) {
+	/* Firefox */
+	-moz-background-size:@x @y;
+	/* WebKit */
+	-webkit-background-size:@x @y;
+	/* Opera 9.5+, later Google Chrome */
+	background-size:@x @y;
+}
+
+@footerheight : 110px;
+
+* { margin:0; padding:0; }
+body {  background:#AFDCEC; }
+
+#stage {	
+	width:100%;
+	position:fixed;
+	left:0;
+	top:0;
+	float:left;
+	z-index:1;
+}
+
+#sun {
+	position:absolute;
+	bottom:125px;
+	width:279px;
+	height:279px;
+	background:url(images/sun.png) 50% 50% no-repeat;
+	display:block;
+	.backgroundsize(auto,100%);
+	
+}
+
+#hills {
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:@footerheight;
+	background:green;
+	z-index:3;
+}
+
+#cloud1 {
+	position:absolute;
+	top:65px;
+	width:279px;
+	height:129px;
+	background:#fff;
+	.opacity(0.7);
+	.rounded(35px);
+	display:block;	
+	margin-right:25px;
+}
+
+#cloud2 {
+	position:absolute;
+	top:35px;
+	right:0;
+	width:229px;
+	height:99px;
+	background:#fff;
+	.opacity(0.8);
+	.rounded(35px);
+	display:block;	
+}
+
+#stars {
+	position:absolute;
+	top:0;
+	left:0;
+	display:block;
+	width:100%;
+	height:200px;
+}
+
+.star { 
+	width:2px;
+	height:2px;
+	display:block;
+	position:relative;
+	background:#fff;
+}
+
+.content-wrapper {
+	overflow:hidden;
+}
+
+#content {
+	
+	position:relative;
+	z-index:2;
+
+	width:940px;
+	padding:16px;
+	margin:50px auto (@footerheight + 50) auto;	
+	
+	.opacity(0.8);
+	.rounded(16px);
+
+	font:12px/16px Arial, sans-serif;
+	background:#fff;
+
+	h1, h2, h3, h4, h5, h6, p, ol, ul, table, form, fieldset { margin-bottom:16px; }
+
+}
