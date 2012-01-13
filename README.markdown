@@ -5,7 +5,7 @@ ScrollTracker is a tiny plugin which lets you easily do things depending on how 
 * jQuery
 
 ## Installation
-Simply include the `scrolltracker.js` file on your page _after your inclusion of jQuery  
+Simply include the `scrolltracker.js` file on your page __after__ your inclusion of jQuery  
 E.g.
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -13,7 +13,7 @@ E.g.
 
 
 ##Usage
-Once included, you'll need to initialize the tracker, and then add at least one callback(a function which is called whenever the page is scrolled)
+Once included, you'll need to initialize the tracker, and then add at least one callback (a function which is called whenever the page is scrolled)
 The callback can accept two parameters:
 
 `scrollpercent` - how far the viewer has scrolled as a percent
