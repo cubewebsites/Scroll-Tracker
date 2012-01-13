@@ -34,7 +34,7 @@ E.g.
 ##Documentation
 Beyond the basics, you can take advantage of various other features:
 
-'''onResize''' - attach a callback function to this event if you need to handle window resizing.
+`onResize` - attach a callback function to this event if you need to handle window resizing.
 E.g.
  
 	scrollTracker.onResize = function(){
