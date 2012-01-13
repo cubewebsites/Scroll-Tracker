@@ -38,7 +38,7 @@ $(document).ready(function(){
 	//various colours of the day
 	var skycolours	=	({
 		night : '#112B3D',
-		dawn  : '#836f8e',
+		dawn  : '#3E3146',
 		morning : '#DDF6DF',
 		midday : '#C2F5EE',
 		afternoon : '#55DBEE',		
