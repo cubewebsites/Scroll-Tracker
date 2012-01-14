@@ -106,7 +106,7 @@ $(document).ready(function(){
 			from = skycolours.dusk;
 			to = skycolours.night;
 		}
-		//let me light up the sky...
+		//let me light up the sky...light it up for you...
 		stage.stop().animate({backgroundColor:to},'fast');		
 
 		//move the sun along the arc
