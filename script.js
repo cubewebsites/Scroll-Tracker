@@ -58,6 +58,12 @@ $(document).ready(function(){
 	});
 	scrollTracker.addObject('cloud2',animateCloud2);
 	scrollTracker.addObject('stars',animateStars);
+	scrollTracker.addObject('instructions',function(scrollpercent,scrollpos){
+		if(scrollpercent > 10) {
+			$('#instructions').fadeOut();
+			scrollTracker.deleteObject('instructions');
+		}
+	});
 
 	//callback function for window resize
 	function resize() {
