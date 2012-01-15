@@ -8,10 +8,10 @@ ScrollTracker is a tiny plugin which lets you easily do things depending on how 
 ## Installation
 Simply include the `scrolltracker.js` file on your page __after__ your inclusion of jQuery  
 E.g.
-```html
+
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="scrolltracker.js"></script>
-```
+
 
 ##Usage
 Once included, you'll need to initialize the tracker, and then add at least one callback (a function which is called whenever the page is scrolled)
@@ -21,7 +21,7 @@ The callback can accept two parameters:
 
 `scrollpos` - the number of pixels the viewer has scrolled  
 E.g.
-```javascript
+
 	$(document).ready(function(){
 		//initialize the tracker
 		scrollTracker.initialize();
@@ -30,21 +30,21 @@ E.g.
 			//do something really cool here		
 		});
 	});
-```
+
 
 ##Documentation
 Beyond the basics, you can take advantage of various other features:
 
 `onResize` - attach a callback function to this event if you need to handle window resizing.  
 E.g.
-```javascript
+ 
 	scrollTracker.onResize = function(){
 		alert('window resized');
 	};
-```
+
 `deleteObject` - allows you to delete a tracker  
 E.g.
-```javascript
+
 	scrollTracker.addObject('myobject',function(scrollpercent,scrollpos){
 		if(scrollpercent > 50) {
 			scrollTracker.deleteObject('myobject');
@@ -53,11 +53,11 @@ E.g.
 		var leftpos = scrollpercent/100*960;
 		$('#myobject').css('left':leftpos);
 	})
-```
+
 `pagebottom` - a useful variable.  It's the maximum scroll position (height of the page minus the viewport height).  
 This may be useful when doing certain calculations.  
 E.g.  
-```javascript
+
 	var pagebottom = scrollTracker.pagebottom;
 	//do something with pagebottom here
-```
+
