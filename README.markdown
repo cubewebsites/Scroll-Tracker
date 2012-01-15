@@ -1,5 +1,6 @@
 #ScrollTracker
-ScrollTracker is a tiny plugin which lets you easily do things depending on how far down the page the viewer has scrolled
+ScrollTracker is a tiny plugin which lets you easily do things depending on how far down the page the viewer has scrolled  
+[VIEW DEMO](http://cubewebsites.github.com/Scroll-Tracker/)
 
 ##Requirements
 * jQuery
@@ -40,3 +41,22 @@ E.g.
 	scrollTracker.onResize = function(){
 		alert('window resized');
 	};
+
+`deleteObject` - allows you to delete a tracker  
+E.g.
+
+	scrollTracker.addObject('myobject',function(scrollpercent,scrollpos){
+		if(scrollpercent > 50) {
+			scrollTracker.deleteObject('myobject');
+			return;
+		}
+		var leftpos = scrollpercent/100*960;
+		$('#myobject').css('left':leftpos);
+	})
+
+`pagebottom` - a useful variable.  It's the maximum scroll position (height of the page minus the viewport height).  
+This may be useful when doing certain calculations.  
+E.g.  
+
+	var pagebottom = scrollTracker.pagebottom;
+	//do something with pagebottom here
